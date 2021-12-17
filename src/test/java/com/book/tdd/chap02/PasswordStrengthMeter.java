@@ -3,16 +3,21 @@ package com.book.tdd.chap02;
 public class PasswordStrengthMeter {
     public PasswordStrength meter(String str){
         if(str == null || str.isEmpty()) return PasswordStrength.INVALID;
-        int metCounts = 0;
-
-        if(str.length() >= 8) metCounts ++;
-        if(meetsContainingNumberCriteria(str)) metCounts ++;
-        if(meetsContainingUppercaseCriteria(str)) metCounts ++;
+        int metCounts = getMetCriteriaCounts(str);
 
         if(metCounts <= 1) return PasswordStrength.WEAK;
         if(metCounts == 2) return PasswordStrength.NORMAL;
 
         return PasswordStrength.STRONG;
+    }
+
+    private int getMetCriteriaCounts(String str) {
+        int metCounts = 0;
+
+        if(str.length() >= 8) metCounts ++;
+        if(meetsContainingNumberCriteria(str)) metCounts ++;
+        if(meetsContainingUppercaseCriteria(str)) metCounts ++;
+        return metCounts;
     }
 
     private boolean meetsContainingNumberCriteria(String str) {
