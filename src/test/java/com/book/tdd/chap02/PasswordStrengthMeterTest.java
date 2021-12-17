@@ -51,5 +51,10 @@ public class PasswordStrengthMeterTest {
         assertStrength("", PasswordStrength.INVALID);
     }
 
+    // 5. 대문자를 포함하지 않고 나머지 조건을 충족하는 경우
+    @Test
+    void meetsOtherCriteria_except_for_Uppercase_Then_Normal(){
+        assertStrength("ab@12!csdj", PasswordStrength.NORMAL);
+    }
 
 }
