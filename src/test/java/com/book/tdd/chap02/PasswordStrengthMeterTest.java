@@ -57,4 +57,10 @@ public class PasswordStrengthMeterTest {
         assertStrength("ab@12!csdj", PasswordStrength.NORMAL);
     }
 
+    // 6. 길이가 8글자 이상인 조건만 충족하는 경우
+    @Test
+    void meetsOnlyLength_Then_Weak(){
+        assertStrength("abcdefgi", PasswordStrength.WEAK);
+    }
+
 }

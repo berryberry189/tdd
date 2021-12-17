@@ -3,12 +3,14 @@ package com.book.tdd.chap02;
 public class PasswordStrengthMeter {
     public PasswordStrength meter(String str){
         if(str == null || str.isEmpty()) return PasswordStrength.INVALID;
-        if(str.length() < 8){
-            return PasswordStrength.NORMAL;
-        }
+        boolean lengthEnough = str.length() >= 8;
         boolean containsNum = meetsContainingNumberCriteria(str);
-        if(!containsNum) return PasswordStrength.NORMAL;
         boolean containsUpp = meetsContainingUppercaseCriteria(str);
+
+        if(lengthEnough && !containsNum && !containsUpp) return PasswordStrength.WEAK;
+
+        if(!lengthEnough) return PasswordStrength.NORMAL;
+        if(!containsNum) return PasswordStrength.NORMAL;
         if(!containsUpp) return PasswordStrength.NORMAL;
 
         return PasswordStrength.STRONG;
