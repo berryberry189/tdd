@@ -22,23 +22,34 @@ public class PasswordStrengthMeterTest {
         assertEquals(expStr, result);
     }
 
-    // 모든 규칙을 충족하는 경우
+    // 1. 모든 규칙을 충족하는 경우
     @Test
     void meetsAllCriteria_Then_Strong(){
         assertStrength("ab12!@AB", PasswordStrength.STRONG);
         assertStrength("abc1!@Add", PasswordStrength.STRONG);
     }
 
-    // 길이만 8글자 미만이고 나머지 조건은 총족하는 경우
+    // 2. 길이만 8글자 미만이고 나머지 조건은 총족하는 경우
     @Test
     void meetsOtherCriteria_expect_for_Length_Then_Normal(){
         assertStrength("ab12!@A", PasswordStrength.NORMAL);
     }
 
-    // 숫자를 포함하지 않고 나머지 조건은 충족하는 경우
+    // 3. 숫자를 포함하지 않고 나머지 조건은 충족하는 경우
     @Test
     void meetsOtherCriteria_expect_for_number_Then_Normal(){
         assertStrength("ab!@Awefw", PasswordStrength.NORMAL);
     }
+
+    // 4. 값이 없는 경우
+    @Test
+    void nullInput_Then_Invalid(){
+        assertStrength(null, PasswordStrength.INVALID);
+    }
+    @Test
+    void emptyInput_Then_Invalid(){
+        assertStrength("", PasswordStrength.INVALID);
+    }
+
 
 }

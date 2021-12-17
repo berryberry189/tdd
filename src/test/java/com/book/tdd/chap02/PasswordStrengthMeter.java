@@ -2,6 +2,7 @@ package com.book.tdd.chap02;
 
 public class PasswordStrengthMeter {
     public PasswordStrength meter(String str){
+        if(str == null || str.isEmpty()) return PasswordStrength.INVALID;
         if(str.length() < 8){
             return PasswordStrength.NORMAL;
         }
